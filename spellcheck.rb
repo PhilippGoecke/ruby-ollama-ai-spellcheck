@@ -29,7 +29,7 @@ class AiSpellChecker
   def spellcheck(text, glossary: [])
     glossary_prompt = glossary.map { |term| "- #{term}" }.join("\n")
 
-    prompt_response(<<~PROMPT)
+    response_text = prompt_response(<<~PROMPT)
       Du bist ein professioneller Rechtschreibprüfungs-Assistent für deutsche Texte.
 
       ## Aufgabe
