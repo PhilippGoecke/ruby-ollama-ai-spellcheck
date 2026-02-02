@@ -63,7 +63,7 @@ class AiSpellChecker
 
   # AiSpellChecker.test
   def self.test
-    spellchecker = SpellChecker.new
+    spellchecker = AiSpellChecker.new
     text = "Endtecke das neue aPhone 42 von Guple. Es hat eine giegantische Batterrielaufzeit, einen rasanten CPU, unbegrenzt RAMM und deaktivierte KI."
     puts "Text: #{text}"
     
