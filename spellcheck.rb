@@ -1,6 +1,6 @@
 require 'ollama-ai'
 
-class SpellChecker
+class AiSpellChecker
   def initialize
     @client = Ollama.new(
       credentials: { address: 'http://localhost:11434' },
@@ -26,7 +26,7 @@ class SpellChecker
     response.first['response']
   end
 
-  def spellcheck(text, glossary: {})
+  def spellcheck(text, glossary: [])
     glossary_prompt = glossary.map { |term| "- #{term}" }.join("\n")
 
     prompt_response(<<~PROMPT)
@@ -61,20 +61,28 @@ class SpellChecker
     puts "Ai Response: #{response_text}"
   end
 
-  # AiTranslator.test
+  # AiSpellChecker.test
   def self.test
     spellchecker = SpellChecker.new
     text = "Endtecke das neue aPhone 42 von Guple. Es hat eine giegantische Batterrielaufzeit, einen rasanten CPU, unbegrenzt RAMM und deaktivierte KI."
     puts "Text: #{text}"
     
     # Define a glossary for specific terms
-    glossary = {
+    glossary = [
       'aPhone',
       'Guple'
-    }
+    ]
 
     # Spellcheck with glossary
     spelling = spellchecker.spellcheck(text, glossary: glossary)
     puts "Korrektur: #{spelling}"
   end
 end
+
+# Example usage:
+# AiSpellChecker.load_model
+#
+# spellingcheck = AiSpellChecker.new
+# puts spellingcheck.spellcheck(text, glossary: glossary)
+#
+# AiSpellChecker.test
