@@ -76,7 +76,7 @@ class AiSpellChecker
 
     # Spellcheck with glossary
     spelling = spellchecker.spellcheck(text, glossary: glossary)
-    puts "Korrektur: #{spelling}"
+    puts "KI Korrekturvorschläge: #{spelling}"
   end
 end
 
