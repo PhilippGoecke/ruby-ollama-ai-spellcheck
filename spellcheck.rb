@@ -3,14 +3,14 @@ require 'ollama-ai'
 class AiSpellChecker
   def initialize
     @client = Ollama.new(
-      credentials: { address: 'http://192.168.66.196:11434' },
+      credentials: { address: 'http://localhost:11434' },
       options: { server_sent_events: true, temperature: 0 }
     )
   end
 
   def load_model
     result = @client.pull(
-      { name: 'qwen3:8b' }
+      { name: 'gpt-oss:20b' }
     ) do |event, raw|
       puts event
     end
@@ -18,7 +18,7 @@ class AiSpellChecker
 
   def prompt_response(prompt)
     response = @client.generate({
-      model: 'qwen3:8b',
+      model: 'gpt-oss:20b',
       prompt:,
       stream: false,
       temperature: 0.0,
@@ -42,10 +42,8 @@ class AiSpellChecker
 
   def clean_json_string(text)
     # Extract JSON content from text using regex
-    #json_match = text.match(/.*(\{.*?\})/m)
-    # Extract JSON content from text using regex - match last {...} block with newlines
-    json_match = text.match(/.*\n(\{[^}]*\})\n/m)
-    json_match ? json_match[1] : ''
+    #json_match = text.match(/\n\{\n.*\n\}/m)
+    json_match ? json_match[0] : ''
   end
 
   def spellcheck(text, glossary: [])
