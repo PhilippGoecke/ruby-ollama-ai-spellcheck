@@ -42,7 +42,7 @@ class AiSpellChecker
 
   def clean_json_string(text)
     # Extract JSON content from text using regex
-    #json_match = text.match(/\n\{\n.*\n\}/m)
+    json_match = text.match(/\n\{\n.*\n\}/m)
     json_match ? json_match[0] : ''
   end
 
